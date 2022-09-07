@@ -144,8 +144,14 @@ public class MobileAccessibility extends CordovaPlugin {
                     } catch(ClassCastException ce) {  // cordova-android 4.0+
                         try {   // cordova-android 4.0+
                             Method getView = webView.getClass().getMethod("getView");
-                            Method reload = getView.invoke(webView).getClass().getMethod("reload");
-                            reload.invoke(webView);
+                            //Method reload = getView.invoke(webView).getClass().getMethod("reload");
+                            //reload.invoke(webView);
+                            // Fix app crash when resuming from background after Talkback
+                            Object aView = getView.invoke(webView);
+                            if (aView != null) {
+                                Method reload = aView.getClass().getMethod("reload");
+                                reload.invoke(aView);
+                            }
                         } catch (NoSuchMethodException e) {
                             e.printStackTrace();
                         } catch (InvocationTargetException e) {
