@@ -50,6 +50,7 @@
 
 #define iOS7Delta (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ) ? 20 : 0 )
 #define iOS8Delta (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ) ? 30 : 0 )
+#define iOS10Delta (([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0 ) ? 40 : 0 )
 
 // //////////////////////////////////////////////////
 
@@ -267,6 +268,9 @@
     double fontScale = 1;
     if (iOS7Delta)  {
         fontScale = [[UIFont preferredFontForTextStyle:UIFontTextStyleBody] pointSize] / BASE_UI_FONT_TEXT_STYLE_BODY_POINT_SIZE;
+    }
+    if(iOS10Delta) {
+        fontScale = [[UIFont preferredFontForTextStyle:UIFontTextStyleBody] pointSize] / 17;
     }
     return fontScale;
 }
